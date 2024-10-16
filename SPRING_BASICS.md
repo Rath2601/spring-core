@@ -33,7 +33,7 @@ In stand-alone applications, it is common to create an instance of
 * Using  ``WebInitializer `` with annotation-based configuration: This is a programmatic approach using classes like `` AppConfig and RootConfig ``.
 * Using `` web.xml `` with XML configuration: This is the traditional method where you define the  ``DispatcherServlet and other configurations `` in the web.xml file and configure the  ``application context `` in XML files like  ``spring-servlet.xml ``.
 
-In a Spring Boot scenario, the application context is **implicitly bootstrapped** for you based on common setup conventions. [** Auto-configuration **]
+In a Spring Boot scenario, the application context is **implicitly bootstrapped** for you based on common setup conventions. [ **Auto-configuration** ]
 
 
 
