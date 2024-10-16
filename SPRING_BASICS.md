@@ -25,15 +25,15 @@ The **BeanFactory** interface (spring IOC container) provides an advanced config
 
 The configuration metadata can be represented as **annotated component classes**, configuration classes with factory methods, or external XML files or Groovy scripts.
 
-In spring we can use either xml based configuration or annotation based configuration.
-
-In stand-alone applications, it is common to create an instance of 
+In spring (stand-alone application) we can use either xml based configuration or annotation based configuration.it is common to create an instance of 
    * AnnotationConfigApplicationContext
    * ClassPathXmlApplicationContext
 * Using  ``WebInitializer `` with annotation-based configuration: This is a programmatic approach using classes like `` AppConfig and RootConfig ``.
 * Using `` web.xml `` with XML configuration: This is the traditional method where you define the  ``DispatcherServlet and other configurations `` in the web.xml file and configure the  ``application context `` in XML files like  ``spring-servlet.xml ``.
 
 In a Spring Boot scenario, the application context is **implicitly bootstrapped** for you based on common setup conventions. [ **Auto-configuration** ]
+
+
 
 
 
