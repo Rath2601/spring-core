@@ -69,6 +69,16 @@ Each Spring project has **its own repository, issue tracker, and release cycle**
 
 ---
 
+## Core Technologies in Spring
+
+* Coverage of Spring’s integration with AspectJ (currently the richest — in terms of features — and certainly most mature AOP implementation in the Java enterprise space) is also provided.
+
+* **Ahead-of-Time Compilation**: Unlike traditional Just-in-Time (JIT) compilation, where the code is compiled as it runs, AOT compiles the code during the build phase. This reduces runtime processing, which can improve application startup and overall speed.
+
+* **Native Image Deployment with GraalVM**: GraalVM is a tool that allows Java applications to be compiled into native executables, meaning they don’t need a JVM to run. Using AOT with GraalVM, your application can be converted into a lightweight, standalone binary, which is faster to start and uses less memory—ideal for cloud-native or containerized environments.
+
+---
+
 ## Implementation of the Inversion of Control (IoC)
 
 Basic packages responsible for IoC in Spring, 
