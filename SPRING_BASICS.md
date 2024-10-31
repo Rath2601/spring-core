@@ -33,6 +33,10 @@ In spring (stand-alone application) we can use either xml based configuration or
 
 In a Spring Boot scenario, the application context is **implicitly bootstrapped** for you based on common setup conventions. [ **Auto-configuration** ]
 
+
+
+
+
 ## NOTE: Standalone vs Web Applications, Web Server vs Application Server, Spring & Spring Boot
 
 ### 1. Standalone vs Web Application
@@ -99,7 +103,9 @@ In a Spring Boot scenario, the application context is **implicitly bootstrapped*
 | **Enterprise Features**            | No EJB support. Spring manages transactions, DI, etc.| No EJB support. Uses Spring’s ecosystem.               | Supports EJB, JNDI, JMS, and other Java EE services.             |
 
 
+## NOTE : Common in context of Spring, Springboot, Java
 
+* The Java Virtual Machine is the runtime environment that allows Java bytecode to be executed. Languages like Groovy and Kotlin compile down to Java bytecode, which can then run on the JVM.
 
 
 
