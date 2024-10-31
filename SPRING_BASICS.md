@@ -59,6 +59,16 @@ Each Spring project has **its own repository, issue tracker, and release cycle**
 
 ---
 
+### **Spring Design Principle**
+
+- **Flexibility**: Offers choices for switching components (e.g., persistence providers) without code changes.
+- **Inclusivity**: Supports various development approaches; not opinionated.
+- **Compatibility**: Maintains strong backward compatibility across versions.
+- **API Design**: Focuses on intuitive, stable APIs.
+- **Code Quality**: Emphasizes clean code, detailed javadocs, and no circular dependencies.
+
+---
+
 ## Implementation of the Inversion of Control (IoC)
 
 Basic packages responsible for IoC in Spring, 
