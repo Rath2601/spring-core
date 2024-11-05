@@ -113,9 +113,9 @@ In case of spring web application we'll use the below two approaches,
 * Using  ``WebInitializer `` with annotation-based configuration: This is a programmatic approach using classes like `` AppConfig and RootConfig ``. [JAVA BASED CONFIGURATION]
 * Using `` web.xml `` with XML configuration: This is the traditional method where you define the  ``DispatcherServlet and other configurations `` in the web.xml file and configure the  ``application context `` in XML files like  ``spring-servlet.xml ``. [TRADITIONAL XML BASED CONFIGURATION]
 
-webInitializer -> Initializes dispatcher servlet
-web.xml -> maps servlet to URL pattern
-spring-servlet.xml -> bean definition and spring application context
+* webInitializer -> Initializes dispatcher servlet
+* web.xml -> maps servlet to URL pattern
+* spring-servlet.xml -> bean definition and spring application context
 
 
 In a Spring Boot scenario, the application context is **implicitly bootstrapped** for you based on common setup conventions. [ **Auto-configuration** ]
