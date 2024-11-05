@@ -119,6 +119,9 @@ In case of spring web application we'll use the below two approaches,
 * In a Spring Boot scenario, the application context is **implicitly bootstrapped** for you based on common setup conventions. [ **Auto-configuration** ]
 * You can create your **custom configuration class** with the desired @Bean methods, and **both Spring and Spring Boot** will automatically recognize and use your custom beans when it starts up.
 
+* தரவுத்தளம்: வலிமையான தரவுத்தளம் தேவை, பயனர்கள் பதிவிறக்கம் செய்து அமைக்க வேண்டும்.
+* உதாரணம்: Jaspersoft Studio என்பது ஜாவாவில் உருவாக்கப்பட்ட ஒரு தனியார் பயன்பாடு.
+
 ---
 
 ## NOTE: Standalone vs Web Applications, Web Server vs Application Server, Spring & Spring Boot
