@@ -112,17 +112,26 @@ In spring (stand-alone application) we can use either xml based configuration or
 
 In case of spring web application we'll use the below two approaches, 
 
-* Using  ``WebInitializer `` with annotation-based configuration: This is a programmatic approach using classes like `` AppConfig and RootConfig ``. [JAVA BASED CONFIGURATION]
-* Using `` web.xml `` with XML configuration: This is the traditional method where you define the  ``DispatcherServlet and other configurations `` in the web.xml file and configure the  ``application context `` in XML files like  ``spring-servlet.xml ``. [TRADITIONAL XML BASED CONFIGURATION]
-* webInitializer -> Initializes dispatcher servlet
-* web.xml -> maps servlet to URL pattern
-* spring-servlet.xml -> bean definition and spring application context
+1 Using  ``WebInitializer `` with annotation-based configuration: This is a programmatic approach using classes like `` AppConfig and RootConfig ``. [JAVA BASED CONFIGURATION]
+2 Using `` web.xml `` with XML configuration: This is the traditional method where you define the  ``DispatcherServlet and other configurations `` in the web.xml file and configure the  ``application context `` in XML files like  ``spring-servlet.xml ``[TRADITIONAL XML BASED CONFIGURATION]
 
-* In a Spring Boot scenario, the application context is **implicitly bootstrapped** for you based on common setup conventions. [ **Auto-configuration** ]
-* You can create your **custom configuration class** with the desired @Bean methods, and **both Spring and Spring Boot** will automatically recognize and use your custom beans when it starts up.
+XML BASED CONFIGURATION:
 
-* தரவுத்தளம்: வலிமையான தரவுத்தளம் தேவை, பயனர்கள் பதிவிறக்கம் செய்து அமைக்க வேண்டும்.
-* உதாரணம்: Jaspersoft Studio என்பது ஜாவாவில் உருவாக்கப்பட்ட ஒரு தனியார் பயன்பாடு.
+1 ``<bean/>`` elements inside a top-level ``<beans/>`` element.
+2 `` id `` used as reference in other bean
+3 ``class`` fully qualified name.
+4 property ``name`` element refers to the name of the JavaBean property, and the ``ref`` element refers to the name of another bean definition. ``id and ref`` are same (we can give anything as we want)
+5 we can use multiple xml file in a single one using ``import`` tag
+  
+1 webInitializer -> Initializes dispatcher servlet
+2 web.xml -> maps servlet to URL pattern
+3 spring-servlet.xml -> bean definition and spring application context
+
+1 In a Spring Boot scenario, the application context is **implicitly bootstrapped** for you based on common setup conventions. [ **Auto-configuration** ]
+2 You can create your **custom configuration class** with the desired @Bean methods, and **both Spring and Spring Boot** will automatically recognize and use your custom beans when it starts up.
+
+1 தரவுத்தளம்: வலிமையான தரவுத்தளம் தேவை, பயனர்கள் பதிவிறக்கம் செய்து அமைக்க வேண்டும்.
+2 உதாரணம்: Jaspersoft Studio என்பது ஜாவாவில் உருவாக்கப்பட்ட ஒரு தனியார் பயன்பாடு.
 
 ---
 
