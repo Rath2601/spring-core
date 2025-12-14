@@ -113,18 +113,6 @@
 - Internationalization
 - Web support (`WebApplicationContext`)
 ---
-
-### 8. Bean Lifecycle Management in Spring
-1. Bean Instantiation
-2. Dependency Injection
-3. Aware Interfaces
-4. BeanPostProcessor (before init)
-5. Initialization (`@PostConstruct`, `afterPropertiesSet`)
-6. BeanPostProcessor (after init)
-7. Bean Ready for Use
-8. Destruction (`@PreDestroy`, `destroy`)
----
-
 ### Core Technologies in Spring
 - Aspect-Oriented Programming (AspectJ)
 - Ahead-of-Time Compilation (AOT)
