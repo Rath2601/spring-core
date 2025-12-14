@@ -41,6 +41,9 @@
 | Modern JAR   | Fat JAR | Embedded Tomcat       | Kubernetes, Cloud Run    |
 | Serverless   | JAR/Docker | No dedicated server | AWS Lambda              |
 
+1. Spring web application --> deployed on Tomcat (servlet container), Websphere/Glassfish (Application server)
+2. Jakarta EE application --> deployed only on application servers which internally has servlet containers
+3. Springboot application --> No need to deploy at all , we can directly run application. We can also override that and use external Tomcat (servlet container), Websphere/Glassfish (Application server) based on usage
 ---
 
 ### Packaging Formats
