@@ -1,219 +1,129 @@
-# SPRING FRAMEWORK
-
-## HISTORY OF SPRING FRAMEWORK
-
-### **Spring's Origin and Purpose**
+## SPRING FRAMEWORK
+### HISTORY OF SPRING FRAMEWORK
+#### **Spring's Origin and Purpose**
 - **Spring was created in 2003** as a response to the complexities in J2EE (Java 2 Platform, Enterprise Edition), the precursor to Java EE (now Jakarta EE). At the time, J2EE was seen as overly complicated, requiring developers to follow strict rules and complex configurations for enterprise applications.
 - **Spring's goal** was to simplify application development by focusing on **dependency injection** and **aspect-oriented programming**, which enabled cleaner, more modular code.
-  
+---
+### 1. What is Jakarta EE and Spring and how they are related
+- **Jakarta EE** is a **set of specifications** (standards) for building enterprise Java applications. It defines APIs like Servlet, JPA, JAX-RS, CDI, EJB, etc., but **does not provide implementations**.
+- **Application servers** (GlassFish, WildFly, WebLogic) provide **implementations of Jakarta EE specifications**.
+- **Spring** is a **framework**, not a specification. It provides its **own implementations and abstractions**, while selectively **integrating with some Jakarta EE specifications** instead of implementing the full Jakarta EE platform.
+- Spring **replaced the need for heavy EJB-based Java EE development**, while still being able to **run on top of Jakarta EE infrastructure** when required.
 ---
 
-### **Spring and Jakarta EE Relationship**
-- **Spring and Jakarta EE** aren’t direct competitors but work **complementarily**. Spring doesn't adopt all Jakarta EE specifications but selectively integrates those that enhance its programming model. This means that Spring allows you to use some Jakarta EE technologies without being locked into the full Jakarta EE framework.
+#### **Spring and Jakarta EE Relationship**
+- **Spring and Jakarta EE** aren’t direct competitors but work **complementarily**.
+- Spring **uses some Jakarta EE APIs** (Servlet, JPA, Bean Validation, etc.).
+- Spring **reimplements many enterprise concerns itself** (DI, transactions, security).
 
-#### **Jakarta EE Specifications Integrated by Spring**
-   - **Servlet API (JSR 340)**: Used to build web applications with Java servlets.
-   - **WebSocket API (JSR 356)**: Supports real-time, two-way communication between clients and servers.
-   - **Concurrency Utilities (JSR 236)**: Provides tools for handling concurrency and multithreading in applications.
-   - **JSON Binding API (JSR 367)**: Allows Java objects to be converted to and from JSON.
-   - **Bean Validation (JSR 303)**: Ensures that Java Beans (components) follow specific validation constraints.
-   - **JPA (JSR 338)**: Provides a standard for Java object-relational mapping to manage database persistence.
-   - **JMS (JSR 914)**: Java Messaging Service for handling messages between applications.
-   - **JTA/JCA**: For transaction management, ensuring that multiple operations complete successfully or roll back if any part fails.
-
+##### **Jakarta EE Specifications Integrated by Spring**
+- **Servlet API (JSR 340 / Jakarta Servlet)**  
+- **WebSocket API (JSR 356)**  
+- **Bean Validation (JSR 303 / 380)**  
+- **JPA (JSR 338)**  
+- **JMS (JSR 914)**  
+- **JTA (Transactions)**  
+- **Common Annotations (JSR 250)**  
+- **Dependency Injection (JSR 330)**  
 ---
 
-### **Dependency Injection (DI) and Annotations in Spring**
-- **Dependency Injection** (JSR 330) and **Common Annotations** (JSR 250) are essential tools in Spring for managing how objects depend on each other. These are **industry-standard annotations** that Spring supports, giving developers the option to use a **consistent API** instead of Spring-specific tools.
-  
----
-
-### **Namespace Transition: javax to jakarta**
-- **Spring Framework 6.0** is now aligned with **Jakarta EE 9** and beyond. This update means Spring is compatible with modern Jakarta EE specifications, using the **`jakarta` namespace** instead of the old `javax` namespace.
-- **Supported Servers**: Spring 6.0 can run on newer server versions, like **Tomcat 10.1**, **Jetty 11**, and **Undertow 2.3**.
-- **Hibernate ORM 6.1** compatibility means Spring can continue using this popular ORM tool for database interactions.
-
----
-
-### **Deployment Shift: Application Server to Embedded Containers**
-- **In the early days**, both Spring and J2EE applications were designed for deployment in **application servers** (like JBoss, WebSphere), which manage the application's lifecycle, security, and database connections.
-- **Today, Spring Boot** has changed this model by embedding a **Servlet container directly into the application**, allowing for easier deployment, particularly in **DevOps** and **cloud** environments. With Spring Boot, you don’t need a separate application server like JBoss to run the app.
+### 2. Jakarta EE Specifications vs Spring (Comparison Table)
+| Jakarta EE Spec | JSR | Purpose of JSR | Common Implementations | Spring Alternative | Spring Relation |
+|-----------------|-----|----------------|------------------------|-------------------|-----------------|
+| Servlet | JSR 340 | HTTP request handling | Tomcat, Jetty, Undertow | Spring MVC | Uses Servlet API |
+| JAX-RS | JSR 339 | REST APIs | Jersey, RESTEasy | Spring MVC / WebFlux | Spring does not use JAX-RS |
+| JPA | JSR 338 | ORM | Hibernate, EclipseLink | Spring Data JPA | Uses JPA underneath |
+| CDI | JSR 365 | Dependency Injection | Weld | Spring Core | Own DI container |
+| EJB | JSR 345 | Business components | WildFly, GlassFish | Spring | Replaced by Spring |
+| JMS | JSR 914 | Messaging | ActiveMQ, Artemis | Spring Kafka / JMS | Integrates, not implements |
+| JTA | JSR 907 | Transactions | Narayana | Spring Tx | Can delegate to JTA |
+| Bean Validation | JSR 303 | Validation | Hibernate Validator | Spring Validation | Uses implementation |
 
 ---
-
-### **WebFlux: Moving Beyond the Servlet API**
-- **Spring WebFlux** (introduced in Spring 5) allows developers to build **non-blocking, reactive applications** that can run on servers like **Netty**, which aren’t traditional Servlet containers.
-- This approach is optimized for modern, high-throughput applications that need to handle a lot of concurrent requests without being limited by traditional synchronous programming.
-
----
-
-### **Spring Ecosystem**
-- **Beyond Spring Framework**, there’s an entire **Spring ecosystem** with projects tailored for various tasks:
-   - **Spring Boot**: Simplifies configuration and deployment by embedding necessary dependencies and a web server.
-   - **Spring Security**: Manages application security.
-   - **Spring Data**: Simplifies data access, focusing on databases.
-   - **Spring Cloud**: Helps in building distributed, cloud-based applications.
-   - **Spring Batch**: Manages batch processing, useful in tasks like data migration.
-
-Each Spring project has **its own repository, issue tracker, and release cycle**, which means they’re developed independently but can work together to build robust applications.
+### 3. Deployment Comparison
+| Feature | Jakarta EE App | Spring App | Spring Boot App |
+|-------|----------------|------------|------------------|
+| Packaging | WAR/EAR | WAR | JAR / WAR |
+| Server Required | Application Server | Servlet Container or App Server | Embedded server or Servlet Container or App Server |
+| Deployment | Mandatory | Optional | Not required |
+| Startup | Slower | Faster | Fastest |
+| EJB Support | Yes | No | No |
+| Cloud Ready | Medium | High | Very High |
 
 ---
+### 4. Spring Projects vs Jakarta EE
 
-### **Spring Design Principle**
-
-- **Flexibility**: Offers choices for switching components (e.g., persistence providers) without code changes.
-- **Inclusivity**: Supports various development approaches; not opinionated.
-- **Compatibility**: Maintains strong backward compatibility across versions.
-- **API Design**: Focuses on intuitive, stable APIs.
-- **Code Quality**: Emphasizes clean code, detailed javadocs, and no circular dependencies.
-
----
-
-## Core Technologies in Spring
-
-* Coverage of Spring’s integration with AspectJ (currently the richest — in terms of features — and certainly most mature AOP implementation in the Java enterprise space) is also provided.
-
-* **Ahead-of-Time Compilation**: Unlike traditional Just-in-Time (JIT) compilation, where the code is compiled as it runs, AOT compiles the code during the build phase. This reduces runtime processing, which can improve application startup and overall speed.
-
-* **Native Image Deployment with GraalVM**: GraalVM is a tool that allows Java applications to be compiled into native executables, meaning they don’t need a JVM to run. Using AOT with GraalVM, your application can be converted into a lightweight, standalone binary, which is faster to start and uses less memory—ideal for cloud-native or containerized environments.
+| Spring Project | What it does | Jakarta EE Equivalent | Jakarta EE Implementation? |
+|---------------|-------------|------------------------|----------------------------|
+| Spring boot | Production ready application | Servlet + JAX-RS | ❌ No |
+| Spring MVC | Web MVC / REST | Servlet + JAX-RS | ❌ No |
+| Spring WebFlux | Reactive Web | None | ❌ No |
+| Spring Security | AuthN/AuthZ | Jakarta Security | ❌ No |
+| Spring Data JPA | Data access | JPA | ⚠️ Uses JPA |
+| Spring Kafka | Messaging | JMS | ❌ No |
+| Spring Cloud | Distributed systems | None | ❌ No |
+| Spring Tx | Transactions | JTA | ⚠️ Integrates |
+| Spring Core (DI) | Dependency Injection | CDI | ❌ No |
 
 ---
-
-## Implementation of the Inversion of Control (IoC)
-
-Basic packages responsible for IoC in Spring, 
- * org.springframework.beans
- * org.springframework.context
-
-### IoC Container
-
-The **BeanFactory** interface (spring IOC container) provides an advanced configuration mechanism capable of managing any type of object.
-
-**ApplicationContext** (superset of the BeanFactory) is a sub-interface of **BeanFactory**. It adds more enterprise-specific functionality:
-  * Easier integration with Spring’s AOP features
-  * Message resource handling (for use in internationalization)
-  * Event publication
-  * Application-layer specific contexts such as the WebApplicationContext for use in web applications.
-
-### Bean
-
-1. A bean is an object that is instantiated, assembled, and managed by a Spring IoC container.
-2. Beans, and the dependencies among them, are reflected in the **configuration metadata** used by a container.
-
-### Configuration Metadata
-
-The configuration metadata can be represented as **annotated component classes**, configuration classes with factory methods, or external XML files or Groovy scripts.
-
-**Typically, you define service layer objects, persistence layer objects such as repositories or data access objects (DAOs), presentation objects such as Web controllers, infrastructure objects such as a JPA EntityManagerFactory, JMS queues, and so forth. Typically, one does not configure fine-grained domain objects in the container, because it is usually the responsibility of repositories and business logic to create and load domain objects.** 
-
-In spring (stand-alone application) we can use either xml based configuration or annotation based configuration.it is common to create an instance of 
-   * AnnotationConfigApplicationContext
-   * ClassPathXmlApplicationContext
-
-In case of spring web application we'll use the below two approaches, 
-
-1. Using  ``WebInitializer `` with annotation-based configuration: This is a programmatic approach using classes like `` AppConfig and RootConfig ``. [JAVA BASED CONFIGURATION]
-2. Using `` web.xml `` with XML configuration: This is the traditional method where you define the  ``DispatcherServlet and other configurations `` in the web.xml file and configure the  ``application context `` in XML files like  ``spring-servlet.xml ``[TRADITIONAL XML BASED CONFIGURATION]
-   
+### 5. Spring Primary Design Principles & Features
+- **Loose Coupling**
+- **Dependency Injection**
+- **Aspect-Oriented Programming**
+- **POJO-based development**
+- **Modular architecture**
+- **Backward compatibility**
+- **Convention over configuration (Spring Boot)**
 ---
 
-XML BASED CONFIGURATION:
+### 6. IoC Container Deep Dive in Spring
+#### IoC Packages
+- `org.springframework.beans`
+- `org.springframework.context`
 
-1. ``<bean/>`` elements inside a top-level ``<beans/>`` element.
-2. `` id `` used as reference in other bean
-3. ``class`` fully qualified name.
-4. property ``name`` element refers to the name of the JavaBean property, and the ``ref`` element refers to the name of another bean definition. ``id and ref`` are same (we can give anything as we want)
-5. we can use multiple xml file in a single one using ``import`` tag
-    
+#### BeanFactory
+- Basic IoC container
+- Lazy initialization
+- Low-level API
+
+#### ApplicationContext
+- Superset of BeanFactory
+- Eager initialization
+- AOP support
+- Event publishing
+- Internationalization
+- Web support (`WebApplicationContext`)
 ---
 
-1. webInitializer -> Initializes dispatcher servlet
-2. web.xml -> maps servlet to URL pattern
-3. spring-servlet.xml -> bean definition and spring application context
-  
+### 8. Bean Lifecycle Management in Spring
+1. Bean Instantiation
+2. Dependency Injection
+3. Aware Interfaces
+4. BeanPostProcessor (before init)
+5. Initialization (`@PostConstruct`, `afterPropertiesSet`)
+6. BeanPostProcessor (after init)
+7. Bean Ready for Use
+8. Destruction (`@PreDestroy`, `destroy`)
 ---
 
-1. In a Spring Boot scenario, the application context is **implicitly bootstrapped** for you based on common setup conventions. [ **Auto-configuration** ]
-2. You can create your **custom configuration class** with the desired @Bean methods, and **both Spring and Spring Boot** will automatically recognize and use your custom beans when it starts up.
-  
+### Core Technologies in Spring
+- Aspect-Oriented Programming (AspectJ)
+- Ahead-of-Time Compilation (AOT)
+- Native Image support via GraalVM
 ---
 
-1. தரவுத்தளம்: வலிமையான தரவுத்தளம் தேவை, பயனர்கள் பதிவிறக்கம் செய்து அமைக்க வேண்டும்.
-2. உதாரணம்: Jaspersoft Studio என்பது ஜாவாவில் உருவாக்கப்பட்ட ஒரு தனியார் பயன்பாடு.
+### NOTE: Standalone vs Web Applications, Spring & Spring Boot
+#### Standalone vs Web Application
 
+| Type | Description | Example |
+|-----|-------------|---------|
+| Standalone | No server needed | EX: Desktop apps (Excel) |
+| Web App | Needs server | Ex: Banking web app |
 ---
 
-## NOTE: Standalone vs Web Applications, Web Server vs Application Server, Spring & Spring Boot
-
-### 1. Standalone vs Web Application
-
-| **Type**               | **Description**                                                                                                                                          | **Example**                     |
-|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------|
-| **Standalone Application** | Does not require a web server or web interface.                                                                                                          | Excel (can be downloaded and used without a web browser or server). |
-| **Web Application**     | Requires a web server and must be used with a web browser.                                                                                               | HDFC Netbanking (can only be used with the internet).                |
-
----
-
-### 2. Web Server vs Application Server
-
-| **Feature**                        | **Web Server**                                                   | **Application Server**                                                                                                      |
-|------------------------------------|-------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
-| **Primary Function**               | Serves static content (HTML, images).                             | Runs server-side programming, supports transactions, dependency injection, security, concurrency, and database access.      |
-| **Handles Dynamic Content**        | Can serve dynamic content using plugins (e.g., PHP, Python).      | Natively supports dynamic content through servlets, JSP, EJB, etc.                                                          |
-| **Database Interaction**           | Does not interact with databases.                                 | Can directly interact with databases.                                                                                       |
-| **Java E-Space**                   | N/A                                                               | Divided into different containers:                                                                                          |
-|                                    |                                                                   | - **Servlet Container** (e.g., Apache Tomcat): Runs servlets, JSP, JSF.                                                     |
-|                                    |                                                                   | - **EJB Container**: Manages Enterprise Java Beans and transaction lifecycles.                                               |
-|                                    |                                                                   | - **Application Client Container**: Handles dependency injection and security.                                               |
-| **Load Balancing**                 | Performs load balancing between application servers.              | May also provide load balancing but has more advanced features for clustering and failover.                                  |
-| **Examples**                       | Apache HTTP Server, Nginx                                         | WebSphere, WebLogic, JBoss (WildFly).                                                                                        |
-
----
-
-### 3. Spring & Spring Boot with Servlet Containers
-
-- **Spring**:
-  - Spring does not require a full **application server** (like JBoss or GlassFish).
-  - It runs perfectly well on a **servlet container** (like Tomcat or Jetty).
-  - Only needs a **web server** (for deployment purposes) to work as a web application.
-  
-  **Why?**
-  - Spring has its own ecosystem (IoC, DI, transaction management) to handle most of the same tasks that Jakarta EE (Java EE) does, making heavy application servers unnecessary.
-
-- **Spring Boot**:
-  - Spring Boot embeds a **servlet container** (like Tomcat or Jetty) within the application itself.
-  - No need to install an external web server or servlet container. The application can run as a standalone jar.
-  - In almost all cases, Spring Boot **does not require a full application server** and only needs a web server for deployment.
-
-#### When to Use a Full Application Server with Spring or Spring Boot?
-
-- **Enterprise Features**: If the project needs advanced Java EE features (e.g., JMS, JNDI, distributed transactions).
-- **Infrastructure or Policy Reasons**: Legacy systems or internal policies might dictate the use of a full application server.
-- **Clustering & Load Balancing**: If your application requires clustering, high availability, or load balancing features, a full application server might be preferred.
-
-| **Scenario**                        | **Use a Full Application Server?**                                                                                                            |
-|-------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
-| Spring/Spring Boot web applications | No, unless the project requires specific Jakarta EE features (like EJB, JMS, or distributed transactions).                                     |
-| Lightweight web applications        | No, a servlet container (like Tomcat) is sufficient.                                                                                           |
-| Enterprise systems with EJB         | Yes, full application servers like JBoss or WebLogic should be used.                                                                           |
-| Legacy or complex infrastructure    | Yes, especially when the organization has policies that require a full application server or if the application interacts with Java EE components. |
-
----
-
-### 4. Summary of Deployment Options for Spring Applications
-
-| **Feature**                        | **Spring MVC + Tomcat**                              | **Spring Boot + Embedded Tomcat**                      | **Full Application Server (e.g., JBoss)**                       |
-|------------------------------------|-----------------------------------------------------|-------------------------------------------------------|----------------------------------------------------------------|
-| **Need External Server**           | Yes, requires a servlet container like Tomcat.       | No, embedded server is included within the application. | Yes, but only if using advanced EE features (EJB, JMS, etc.).    |
-| **Clustering & Load Balancing**    | Managed externally by web servers.                   | Handled by load balancer setup.                        | Built-in support in full application servers (e.g., JBoss).     |
-| **Enterprise Features**            | No EJB support. Spring manages transactions, DI, etc.| No EJB support. Uses Spring’s ecosystem.               | Supports EJB, JNDI, JMS, and other Java EE services.             |
-
----
-
-## NOTE : Common in context of Spring, Springboot, Java
-
-* The Java Virtual Machine is the runtime environment that allows Java bytecode to be executed. Languages like Groovy and Kotlin compile down to Java bytecode, which can then run on the JVM.
-
-
-
-
+## Summary
+- Jakarta EE = Specifications
+- **Application Server** = Implementations (Websphere, Wildfly, Glassfish)
+- Spring = Framework
+- Spring Boot = Opinionated Spring + Embedded Server
+- Enterprise web app ≠ **Application Server** mandatory anymore
