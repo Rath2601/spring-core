@@ -1,3 +1,22 @@
+## COMMONLY USED FRAMEWORK IN JAVA
+
+| Category                                 | Most Used Java Frameworks                                                                 |
+| ---------------------------------------- | ----------------------------------------------------------------------------------------- |
+| **Web Applications**                     | Spring Boot, Spring MVC, Hibernate (ORM), Jakarta EE, Struts (legacy) |
+| **Microservices**                        | Spring Boot, Spring Cloud, Quarkus, Micronaut, Dropwizard                                 |
+| **REST API Development**                 | Spring Boot, Spring WebFlux, JAX-RS (Jersey), Micronaut                                   |
+| **Desktop Applications**                 | JavaFX, Swing                                                                        |
+| **Mobile Applications (Cross-platform)** | Codename One, Gluon Mobile (JavaFX), LibGDX (games)                                       |
+| **Android Development (Java-based)**     | Android SDK                        |
+| **iOS Development (using Java)**         | Codename One, Gluon Mobile, LibGDX (via RoboVM)                                           |
+| **ORM / Database Frameworks**            | Hibernate, JPA, MyBatis, Spring Data JPA                                                  |
+| **Web UI Frameworks**                    | JSF                                                                  |
+| **Cloud / Serverless**                   | Spring Cloud                                                         |
+| **Big Data (Java-based)**                | Apache Hadoop, Apache Spark, Apache Flink                                                 |
+| **Testing Frameworks**                   | JUnit, TestNG, Mockito, Selenium, Cucumber                                                |
+| **Messaging / Integration**              | Apache Kafka (Java APIs), Spring Integration                              |
+
+
 ## SPRING FRAMEWORK
 ### HISTORY OF SPRING FRAMEWORK
 #### **Spring's Origin and Purpose**
