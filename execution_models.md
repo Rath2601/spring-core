@@ -122,11 +122,10 @@ Process on CPU
 Build → Bytecode
 Run → JVM starts
   ↓
-Classpath scanning
-Annotation processing
-Reflection-based wiring
-Proxy generation
-Bean creation
+Classpath scanning (@Component, @Configuration, @Bean,..)
+Annotation processing (@ConditionalOnClass, @Profile, @AutoConfiguration,...)
+Reflection-based wiring (discover constructors and resolve dependencies)
+Proxy generation ((@Transactional, @Async, @Lazy)
 Context initialization
   ↓
 JIT compiles hot paths
@@ -135,7 +134,8 @@ JIT compiles hot paths
 **Issues**
 * Slow startup
 * Heavy reflection
-* Costly for cloud-native apps
+* Costly for cloud-native apps (Spring AOT is optimized for speed and efficiency at startup with less memory and quick startup time ~50–200 ms)
+* reason : **Large heap, Large metaspace (class metadata at runtime), Reflection caches, JIT compiler memory**
 ---
 
 #### 7. Spring Application Startup (With Spring AOT)
