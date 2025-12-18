@@ -86,7 +86,7 @@ Process on CPU
 
 **Usage**
 
-* Ideal for **long-running services** (microservices, servers).
+* Ideal for **long-running services** since Machine code compiled by JIT compiler is cached (microservices, servers).
 
 ---
 
