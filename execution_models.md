@@ -138,6 +138,10 @@ JIT compiles hot paths
 ---
 
 #### 7. Spring Application Startup (With Spring AOT)
+
+* Serverless / native-image apps: Prefer **Spring AOT + compile-time AspectJ**, or minimize use of runtime Spring AOP
+* If you must use Spring AOP: Use runtime hints to explicitly configure reflection/proxies.
+
 ##### Build Time
 ```
 Spring AOT Engine
