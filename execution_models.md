@@ -100,7 +100,6 @@ Process on CPU
 * Requires explicit configuration.
 
 **Why Suitable for Short-Lived Apps**
-* CLI tools
 * Serverless / FaaS
 * Batch jobs
 ---
