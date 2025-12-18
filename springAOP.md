@@ -58,6 +58,7 @@ SentryInterceptor
   ↓
 Real Method
 ```
+Each aspect = one wrapper layer (Caller -> CGLIB Proxy -> RateLimiterAspect -> CircuitBreakerAspect -> TimedAspect -> SentryAspect -> Real Method)
 
 ##### Spring AOP Summary: 
 * Uses proxy-based interception instead of bytecode weaving but uses AspectJ.
