@@ -92,12 +92,12 @@ Process on CPU
 
 #### 4. GraalVM (JVM + Native Image AOT)
 
-##### 4.1 GraalVM as JVM
+##### 4.1 GraalVM JVM Mode
 
 * Drop-in replacement for HotSpot JVM.
 * Faster JIT and better polyglot support.
 
-##### 4.2 GraalVM Native Image (True AOT)
+##### 4.2 GraalVM Native Image Mode(True AOT)
 
 **Flow**
 
@@ -125,7 +125,7 @@ Process on CPU
 
 **Trade-offs**
 
-* Limited reflection & dynamic class loading.
+* Limited reflection & dynamic class loading (class loaded during runtime even if it is not available during compile time).
 * Longer build time.
 * Requires explicit configuration.
 
