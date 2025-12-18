@@ -50,7 +50,7 @@ Process on CPU
 
 **Characteristics**
 
-* Slower than Java/C for CPU-bound tasks.
+* Slower than Java/C for CPU-bound tasks(Pure computation, Cryptography & hashing, Image / video processing, Machine learning, Data & Algorithm, Scientific simulations).
 * Runtime errors possible.
 * Excellent for scripting and rapid development.
 
