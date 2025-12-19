@@ -73,6 +73,7 @@ Features of ApplicationContext:
 * Allows cleanup of resources before shutdown
 ---
 ### Spring Bean lifecycle flow
+```
 Spring Context Starts
 │
 ├─> Load Bean Definitions
@@ -105,7 +106,7 @@ Initialize
 Ready (bean injected, method calls go through proxy)
 │
 Destroy (@PreDestroy / destroy)
-
+```
 ---
 
 ### Type | How container is created
