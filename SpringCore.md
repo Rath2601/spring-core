@@ -1,17 +1,117 @@
-### 1. IoC Container Deep Dive in Spring
-#### IoC Packages
-- `org.springframework.beans`
-- `org.springframework.context`
+## SPRING IOC
+* DI is specialized form of IoC
+* `org.springframework.bean` & `org.springframework.context`  packages are the basis for Spring Framework’s IoC container
 
-#### BeanFactory
-- Basic IoC container
-- Lazy initialization
-- Low-level API
+**ApplicationContext** manages the application lifecycle and runtime infrastructure  
+**BeanFactory** only creates beans and injects dependencies.  
 
-#### ApplicationContext
-- Superset of BeanFactory
-- Eager initialization
-- AOP support
-- Event publishing
-- Internationalization
-- Web support (`WebApplicationContext`)
+Features of ApplicationContext:
+* **Event Publishing**: Notifies beans about startup, shutdown, or custom events for decoupled communication.
+* **Internationalization (i18n)**: Resolves messages based on locale for user-friendly apps.
+* **Web Support**: Supports WebApplicationContext, request/session scopes, and integrates with the servlet environment.
+* **AOP Integration**: Automatically applies proxies and aspects to beans for cross-cutting concerns.
+
+| ApplicationContext | BeanFactory |
+|-------------------|------------|
+| Eager loading (loads all the beans at app startup) | Lazy loading(loads beans on-demand) |
+| Supports all types of bean scopes | supports two scopes (Singleton and Prototype) |
+| automatically registers BeanFactoryPostProcessor(works on definitions (metadata) before bean exists) and BeanPostProcessor (works on actual bean instances after they exist, used to wrap beans with proxies for AOP advice) | Manually Creation is required |
+| ApplicationContext extends ApplicationEventPublisher Which has event publishing feature (ex: Spring publishes a ContextRefreshedEvent when the ApplicationContext is refreshed and fully initialized) (Coordinating work) | Doesn’t have that feature |
+| automatically provides a MessageSource in Spring Boot, so you can safely resolve locale-specific messages without manually registering (support Internationalization) | must manually define a MessageSource bean before you can resolve locale-specific messages (doesn’t support Internationalization by default) |
+
+---
+
+#### 1. Spring Context Startup
+* Spring context begins initialization.
+* Bean definitions are loaded from:
+    * Configuration classes (@Configuration)
+    * XML
+    * Component scanning (@Component, @Service, etc.)
+
+#### 2. BeanFactoryPostProcessors Run 
+* Operate on bean definitions/metadata before any bean instances exist.
+* Examples:
+    * ConfigurationClassPostProcessor
+    * PropertySourcesPlaceholderConfigurer
+* For AOP:
+    * Metadata preparation happens here (e.g., registering AnnotationAwareAspectJAutoProxyCreator)
+
+#### 3. Bean Instantiation
+* Spring creates bean instances:
+    * Constructor is called
+    * Dependencies injected
+* At this point, beans exist but are not yet initialized
+
+#### 4. BeanPostProcessors Run (Spring uses this most)
+##### Step A: postProcessBeforeInitialization
+* Called before init callbacks (@PostConstruct, afterPropertiesSet)
+* Can modify the bean instance
+
+##### Step B: Initialization Callbacks
+* Spring calls:
+    * @PostConstruct methods
+    * afterPropertiesSet() if the bean implements InitializingBean
+* Beans perform custom initialization logic here
+⚠ Note: AOP proxies are not yet applied during @PostConstruct. Method calls to proxied methods inside @PostConstruct will bypass advice.
+
+##### Step C: postProcessAfterInitialization
+* Called after init callbacks
+* AOP Proxy wrapping happens here:
+    * If a bean matches an Advisor (@Transactional, @Aspect), it is wrapped in a proxy
+    * All references to the bean now point to the proxy
+
+#### 5. Beans Ready
+* Proxied beans are injected wherever needed
+* Method calls now go through proxies → interceptors → advice applied
+
+#### 6. Bean Destruction (Shutdown)
+* Spring context closes:
+* Beans are destroyed in reverse order of creation
+* Spring calls:
+    * @PreDestroy methods
+    * destroy() if the bean implements DisposableBean
+* Allows cleanup of resources before shutdown
+---
+### Spring Bean lifecycle flow
+Spring Context Starts
+│
+├─> Load Bean Definitions
+│
+├─> BeanFactoryPostProcessors (metadata preparation, AOP setup)
+│
+├─> Instantiate Beans (constructor + dependency injection)
+│
+├─> BeanPostProcessors:
+│       ├─ postProcessBeforeInitialization
+│       ├─ @PostConstruct / afterPropertiesSet
+│       └─ postProcessAfterInitialization (AOP proxy wrapping)
+│
+├─> Beans Ready (proxies injected, method calls intercepted)
+│
+└─> Context Shutdown:
+        ├─ @PreDestroy
+        └─ destroy() (DisposableBean)
+        
+### Bean lifecycle flow
+Load Beans (bean definitions)
+|
+Instantiate (constructor + DI)
+│
+Initialize
+├─ postProcessBeforeInitialization
+├─ @PostConstruct / afterPropertiesSet
+└─ postProcessAfterInitialization (proxy wrapping)
+│
+Ready (bean injected, method calls go through proxy)
+│
+Destroy (@PreDestroy / destroy)
+
+---
+
+### Type | How container is created
+
+| Type | How container is created |
+|------|-------------------------|
+| Stand-alone | AnnotationConfigApplicationContext / ClassPathXmlApplicationContext manually |
+| Spring Boot Web App | SpringApplication.run() automatically creates an ApplicationContext (ServletWebServerApplicationContext) |
+
