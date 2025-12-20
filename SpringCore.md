@@ -18,6 +18,8 @@ Features of ApplicationContext:
 | automatically registers BeanFactoryPostProcessor(works on definitions (metadata) before bean exists) and BeanPostProcessor (works on actual bean instances after they exist, used to wrap beans with proxies for AOP advice) | Manually Creation is required |
 | ApplicationContext extends ApplicationEventPublisher Which has event publishing feature (ex: Spring publishes a ContextRefreshedEvent when the ApplicationContext is refreshed and fully initialized) (Coordinating work) | Doesn’t have that feature |
 | automatically provides a MessageSource in Spring Boot, so you can safely resolve locale-specific messages without manually registering (support Internationalization) | must manually define a MessageSource bean before you can resolve locale-specific messages (doesn’t support Internationalization by default) |
+|the ApplicationContext becomes a WebApplicationContext, which is aware of the Servlet environment and web-specific scopes.
+DispatcherServlet acts as the front controller, handling HTTP requests and responses by using web infrastructure beans from the WebApplicationContext (such as controllers, handler mappings, and message converters), while business logic is executed through services and repositories invoked by controllers | |
 
 ---
 
