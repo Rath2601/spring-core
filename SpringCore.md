@@ -74,39 +74,33 @@ Features of ApplicationContext:
 * Allows cleanup of resources before shutdown
 ---
 ### Spring Bean lifecycle flow
-```
-Spring Context Starts
+```        
+**Load Bean** Definitions (Parsing @Component, @Bean, XML)
 │
-├─> Load Bean Definitions
+**Instantiate** (Memory allocation)
+├─ Constructor Execution
+└─ Constructor Injection (@Autowired on constructor)
 │
-├─> BeanFactoryPostProcessors (metadata preparation, AOP setup)
+**Populate Properties** (Dependency Injection)
+├─ Field Injection (@Autowired on fields)
+└─ Setter Injection (@Autowired on setters)
 │
-├─> Instantiate Beans (constructor + dependency injection)
+**Initialize** (Setup & Configuration)
+├─ Aware Interfaces (BeanNameAware, BeanFactoryAware, etc.)
+├─ postProcessBeforeInitialization (ApplicationContextAware)
+├─ @PostConstruct (Processed by CommonAnnotationBeanPostProcessor)
+├─ InitializingBean.afterPropertiesSet()
+└─ Custom init-method
 │
-├─> BeanPostProcessors:
-│       ├─ postProcessBeforeInitialization
-│       ├─ @PostConstruct / afterPropertiesSet
-│       └─ postProcessAfterInitialization (AOP proxy wrapping)
+**Post-Initialization** (Modifications)
+└─ postProcessAfterInitialization (AOP Proxy creation / Wrapping)
 │
-├─> Beans Ready (proxies injected, method calls intercepted)
+**Ready** (Bean is in singleton pool; if AOP used, reference is the Proxy)
 │
-└─> Context Shutdown:
-        ├─ @PreDestroy
-        └─ destroy() (DisposableBean)
-        
-### Bean lifecycle flow
-Load Beans (bean definitions)
-|
-Instantiate (constructor + DI)
-│
-Initialize
-├─ postProcessBeforeInitialization
-├─ @PostConstruct / afterPropertiesSet
-└─ postProcessAfterInitialization (proxy wrapping)
-│
-Ready (bean injected, method calls go through proxy)
-│
-Destroy (@PreDestroy / destroy)
+**Destroy** (Container Shutdown)
+├─ @PreDestroy
+├─ DisposableBean.destroy()
+└─ Custom destroy-method
 ```
 ---
 
