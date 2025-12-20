@@ -78,34 +78,25 @@ Features of ApplicationContext:
 **Load Bean Definitions** (Parsing `@Component`, `@Bean`, XML)  
 │  
 **Instantiate** (Memory allocation)  
-├─ **Constructor Execution**
-|
-└─ **Constructor Injection** (`@Autowired` on constructor)  
+├── **Constructor Execution** └── **Constructor Injection** (`@Autowired` on constructor)  
 │  
 **Populate Properties** (Dependency Injection)  
-├─ **Field Injection** (`@Autowired` on fields)
-|
-└─ **Setter Injection** (`@Autowired` on setters)  
+├── **Field Injection** (`@Autowired` on fields)  
+└── **Setter Injection** (`@Autowired` on setters)  
 │  
 **Initialize** (Setup & Configuration)  
-├─ **Aware Interfaces** (`BeanNameAware`, `BeanFactoryAware`, etc.)  
-├─ **postProcessBeforeInitialization** (Handles `@ApplicationContextAware`)  
-├─ **@PostConstruct** (Processed by `CommonAnnotationBeanPostProcessor`)  
-├─ **InitializingBean.afterPropertiesSet()** 
-|
-└─ **Custom init-method** (`@Bean(initMethod=...)`)  
+├── **Aware Interfaces** (`BeanNameAware`, `BeanFactoryAware`, etc.)  
+├── **postProcessBeforeInitialization** (Handles `@ApplicationContextAware`)  
+├── **@PostConstruct** (Processed by `CommonAnnotationBeanPostProcessor`)  
+├── **InitializingBean.afterPropertiesSet()** └── **Custom init-method** (`@Bean(initMethod=...)`)  
 │  
 **Post-Initialization** (Modifications)  
-|
-└─ **postProcessAfterInitialization** (**AOP Proxy Creation** / Wrapping)  
+└── **postProcessAfterInitialization** (**AOP Proxy Creation** / Wrapping)  
 │  
 **Ready** (Bean is in singleton pool; if AOP used, reference is the Proxy)  
 │  
 **Destroy** (Container Shutdown)  
-├─ **@PreDestroy** 
-├─ **DisposableBean.destroy()** 
-|
-└─ **Custom destroy-method**
+├── **@PreDestroy** ├── **DisposableBean.destroy()** └── **Custom destroy-method**
 
 ---
 
