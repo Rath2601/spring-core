@@ -74,30 +74,34 @@ Features of ApplicationContext:
 * Allows cleanup of resources before shutdown
 ---
 ### Spring Bean Lifecycle Flow
-
-**Load Bean Definitions** (Parsing `@Component`, `@Bean`, XML)  
-│  
-**Instantiate** (Memory allocation)  
-├── **Constructor Execution** └── **Constructor Injection** (`@Autowired` on constructor)  
-│  
-**Populate Properties** (Dependency Injection)  
-├── **Field Injection** (`@Autowired` on fields)  
-└── **Setter Injection** (`@Autowired` on setters)  
-│  
-**Initialize** (Setup & Configuration)  
-├── **Aware Interfaces** (`BeanNameAware`, `BeanFactoryAware`, etc.)  
-├── **postProcessBeforeInitialization** (Handles `@ApplicationContextAware`)  
-├── **@PostConstruct** (Processed by `CommonAnnotationBeanPostProcessor`)  
-├── **InitializingBean.afterPropertiesSet()** └── **Custom init-method** (`@Bean(initMethod=...)`)  
-│  
-**Post-Initialization** (Modifications)  
-└── **postProcessAfterInitialization** (**AOP Proxy Creation** / Wrapping)  
-│  
-**Ready** (Bean is in singleton pool; if AOP used, reference is the Proxy)  
-│  
-**Destroy** (Container Shutdown)  
-├── **@PreDestroy** ├── **DisposableBean.destroy()** └── **Custom destroy-method**
-
+```
+Load Bean Definitions (Parsing @Component, @Bean, XML)
+│
+Instantiate (Memory allocation)
+├─ Constructor Execution
+└─ Constructor Injection (@Autowired on constructor)
+│
+Populate Properties (Dependency Injection)
+├─ Field Injection (@Autowired on fields)
+└─ Setter Injection (@Autowired on setters)
+│
+Initialize (Setup & Configuration)
+├─ Aware Interfaces (BeanNameAware, BeanFactoryAware, etc.)
+├─ postProcessBeforeInitialization (ApplicationContextAware)
+├─ @PostConstruct (Processed by CommonAnnotationBeanPostProcessor)
+├─ InitializingBean.afterPropertiesSet()
+└─ Custom init-method
+│
+Post-Initialization (Modifications)
+└─ postProcessAfterInitialization (AOP Proxy creation / Wrapping)
+│
+Ready (Bean is in singleton pool; if AOP used, reference is the Proxy)
+│
+Destroy (Container Shutdown)
+├─ @PreDestroy
+├─ DisposableBean.destroy()
+└─ Custom destroy-method
+```
 ---
 
 ### Type | How container is created
