@@ -111,3 +111,54 @@ Destroy (Container Shutdown)
 | Stand-alone | AnnotationConfigApplicationContext / ClassPathXmlApplicationContext manually |
 | Spring Boot Web App | SpringApplication.run() automatically creates an ApplicationContext (ServletWebServerApplicationContext) |
 
+### Spring supports several bean scopes that control the lifecycle and number of instances created:
+#### Available Scopes
+1. **Singleton (Default)** :  Single instance per Spring container, Created at container startup (if eager), Shared across all requests
+2. **Prototype** : New instance created every time bean is requested, **Spring does NOT automatically instantiate prototype beans at startup** (The bean is "available for rent" but Spring won't instantiate it until it's actually requested), Spring does NOT manage the complete lifecycle of prototype beans (no destroy callbacks) need to manage manually.
+    **When Prototype Beans Are Created:**
+         - When injected into another bean (e.g., autowired into a singleton)
+         - When explicitly requested via `applicationContext.getBean()`
+4. **Request** (Web-aware) : ingle instance per HTTP request,  Valid only within Spring MVC web applications
+5. **Session** (Web-aware) : Single instance per HTTP session, Valid only within Spring MVC web applications
+6. **Application** (Web-aware): Single instance per ServletContext, Valid only within Spring MVC web applications
+7. **WebSocket** (Web-aware): Single instance per WebSocket session, Valid only within WebSocket applications
+
+---
+
+### Conditional Bean Registration : Spring provides conditional annotations to control when beans are registered based on specific conditions:
+#### Common Conditional Annotations
+
+1. **@ConditionalOnMissingBean**
+   - Registers bean only if no bean of the specified type/name exists
+   - Useful for providing default implementations that can be overridden
+2. **@ConditionalOnBean**
+   - Registers bean only if specified bean exists
+   - Dependency-based conditional registration
+3. **@ConditionalOnClass**
+   - Registers bean only if specified class is on the classpath
+   - Useful for auto-configuration based on available libraries
+4. **@ConditionalOnMissingClass**
+   - Registers bean only if specified class is NOT on the classpath
+5. **@ConditionalOnProperty**
+   - Registers bean based on property value
+   - Common in Spring Boot auto-configuration
+6. **@ConditionalOnExpression**
+   - Registers bean based on SpEL expression evaluation
+   - Most flexible condition option
+7. **@ConditionalOnWebApplication / @ConditionalOnNotWebApplication**
+   - Registers bean based on whether it's a web application context
+8. **@ConditionalOnResource**
+   - Registers bean if specified resource exists
+
+### How Conditional Beans Work
+
+1. **Bean Definition Phase:**
+   - Spring evaluates conditions before creating bean instances
+   - If condition fails, bean definition is NOT registered
+2. **With @ConditionalOnMissingBean:**
+   - Spring checks the bean registry (not instantiated beans)
+   - For prototype beans, this checks if definition exists, not if instance exists
+   - Allows overriding default implementations
+3. **Order Matters:**
+   - Conditions are evaluated in bean definition order
+   - `@Order` annotation can influence evaluation order
