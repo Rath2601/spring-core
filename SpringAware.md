@@ -108,6 +108,7 @@ public class MyBean implements ApplicationContextAware {
 }
 ```
 **Note:** ApplicationContext extends BeanFactory, so it provides more functionality than BeanFactoryAware.
+
 ---
 
 ### 4. EnvironmentAware
@@ -137,6 +138,7 @@ public class MyBean implements EnvironmentAware {
 }
 ```
 **Alternative:** Use `@Value("${property.name}")` or `@Autowired Environment` instead.
+
 ---
 
 ### 5. ResourceLoaderAware
