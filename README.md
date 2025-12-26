@@ -43,4 +43,14 @@
 
 - Java foundations (Interfaces, Reflection, Proxies)  
 - Spring AOP concepts  
-- AspectJ and bytecode weaving  
+- AspectJ and bytecode weaving
+
+---
+
+## Spring Aware
+📄 [SpringAware.md](./SpringAware.md)
+
+- Aware interfaces (BeanNameAware, BeanFactoryAware, ApplicationContextAware, etc.)
+- Callback mechanisms
+- Framework dependency injection
+- Lifecycle integration
