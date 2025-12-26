@@ -1,13 +1,14 @@
 ### Spring Aware Interfaces
 #### What are Aware Interfaces?
 
-**Aware interfaces** are a callback mechanism where the Spring container automatically calls specific methods of a bean to provide it with required framework objects or notify it of lifecycle events.
-
-When a bean implements an `*Aware` interface, Spring injects the corresponding framework dependency through the interface's setter method during bean initialization, before other initialization callbacks like `@PostConstruct`.
+- **Aware interfaces** are A callback is a mechanism where the Spring container automatically calls a specific method of a bean to provide it with a required framework object or to notify it of a lifecycle event.
+- All Aware callbacks happen **after** dependency injection but **before** `@PostConstruct` and initialization methods.
 
 #### Important Consideration
 
-**Note:** We should avoid using Aware interfaces because our beans/classes become tightly coupled with Spring framework interfaces. This creates dependencies that require more changes if we switch to another framework or when Spring itself upgrades.
+**Note:** 
+- We should avoid using Aware interfaces because our beans/classes become tightly coupled with Spring framework interfaces.
+- This creates dependencies that require more changes if we switch to another framework or when Spring itself upgrades.
 
 **Better Alternatives:**
 - Use dependency injection via constructor or setter injection
@@ -28,10 +29,9 @@ When a bean implements an `*Aware` interface, Spring injects the corresponding f
 | **MessageSourceAware** | Translation Tools | To show messages in different languages (Internationalization) | 6 |
 
 ---
+### Detailed Interface Descriptions
 
-## Detailed Interface Descriptions
-
-### 1. BeanNameAware
+#### 1. BeanNameAware
 
 **Purpose:** Provides the bean with its own name in the Spring container.
 
@@ -55,7 +55,7 @@ public class MyBean implements BeanNameAware {
 ```
 ---
 
-### 2. BeanFactoryAware
+#### 2. BeanFactoryAware
 
 **Purpose:** Provides access to the underlying `BeanFactory` for programmatic bean lookups.
 
@@ -80,7 +80,7 @@ public class MyBean implements BeanFactoryAware {
 ```
 ---
 
-### 3. ApplicationContextAware
+#### 3. ApplicationContextAware
 
 **Purpose:** Provides access to the full `ApplicationContext` with all its capabilities.
 
@@ -111,7 +111,7 @@ public class MyBean implements ApplicationContextAware {
 
 ---
 
-### 4. EnvironmentAware
+#### 4. EnvironmentAware
 
 **Purpose:** Provides access to the `Environment` for reading properties and profiles.
 
@@ -141,7 +141,7 @@ public class MyBean implements EnvironmentAware {
 
 ---
 
-### 5. ResourceLoaderAware
+#### 5. ResourceLoaderAware
 
 **Purpose:** Provides a `ResourceLoader` to load files and resources from various locations.
 
@@ -168,7 +168,7 @@ public class MyBean implements ResourceLoaderAware {
 ```
 ---
 
-### 6. MessageSourceAware
+#### 6. MessageSourceAware
 
 **Purpose:** Provides a `MessageSource` for internationalization (i18n) and message resolution.
 
@@ -197,16 +197,3 @@ public class MyBean implements MessageSourceAware {
 }
 ```
 ---
-
-## Execution Order
-
-When multiple Aware interfaces are implemented, Spring calls them in a specific order:
-
-1. **BeanNameAware** - Provides bean name
-2. **BeanFactoryAware** - Provides BeanFactory
-3. **ApplicationContextAware** - Provides ApplicationContext
-4. **EnvironmentAware** - Provides Environment
-5. **ResourceLoaderAware** - Provides ResourceLoader
-6. **MessageSourceAware** - Provides MessageSource
-
-All Aware callbacks happen **after** dependency injection but **before** `@PostConstruct` and initialization methods.
