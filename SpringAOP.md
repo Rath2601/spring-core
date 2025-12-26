@@ -12,9 +12,7 @@
   - Method discovery
   - Runtime invocation
 ##### Dynamic Class Generation (PROXY)
-- Creates **new classes at runtime** by generating **JVM bytecode**, without modifying the original class.
-- Libraries like **CGLIB** and **ByteBuddy** are used.
-- (JIT compilation to native code happens later but is not part of proxy creation.)
+- Creates **new classes at runtime** by generating **JVM bytecode**, Interface-based
 
 ---
 
