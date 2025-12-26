@@ -1,3 +1,15 @@
+
+
+### NOTE : 
+- Beans that implement BeanFactoryPostProcessor / BeanPostProcessor are infrastructure beans, not lifecycle-managed application beans.
+  
+``` 
+ SpringApplication.run() ↓ Load BeanDefinitions(XML → @Configuration → @ComponentScan → @Bean methods) ↓ BeanFactoryPostProcessor ↓ Constructor ↓ Dependency Injection (Constructor → Field DI → Setter DI       )↓ postProcessBeforeInitialization ↓ @PostConstruct ↓ afterPropertiesSet ↓ customInit ↓ postProcessAfterInitialization (AOP) ↓ SmartInitializingSingleton ↓ APPLICATION READY ↓ @PreDestroy ↓ DisposableBean.destroy ↓ customDestroy
+
+refresh() of container happens after the bean instantiation and before the ready phase. Other phases happens during the refresh
+```
+
+### SPRING BEAN LIFECYCLE IMPORTANT HOOKS
 ### LOAD PHASE  
 **BeanFactoryPostProcessor (Interface)**
 
