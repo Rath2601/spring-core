@@ -5,9 +5,8 @@
   
 ``` 
  SpringApplication.run() ↓ Load BeanDefinitions(XML → @Configuration → @ComponentScan → @Bean methods) ↓ BeanFactoryPostProcessor ↓ Constructor ↓ Dependency Injection (Constructor → Field DI → Setter DI       )↓ postProcessBeforeInitialization ↓ @PostConstruct ↓ afterPropertiesSet ↓ customInit ↓ postProcessAfterInitialization (AOP) ↓ SmartInitializingSingleton ↓ APPLICATION READY ↓ @PreDestroy ↓ DisposableBean.destroy ↓ customDestroy
-
-refresh() of container happens after the bean instantiation and before the ready phase. Other phases happens during the refresh
 ```
+- refresh() starts after BeanFactoryPostProcessor execution, creates and initializes all singleton beans (constructor → DI → post-processors → init callbacks → SmartInitializingSingleton), and ends just before APPLICATION READY, while destroy callbacks run later during context shutdown.
 
 ### SPRING BEAN LIFECYCLE IMPORTANT HOOKS
 ### LOAD PHASE  
