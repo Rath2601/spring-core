@@ -17,6 +17,27 @@
 | **Messaging / Integration**              | Apache Kafka (Java APIs), Spring Integration                              |
 
 
+### PROBLEMS WITH JVM DIRECTLY
+
+1. **Tight coupling**: can't swap implementations (e.g., test mocks, different payment providers)
+2. **No lifecycle management**: who creates/destroys? Memory leaks?
+3. **No cross-cutting concerns**: transactions, security, logging must be manual
+4. **Testing is harder**: can't inject mocks easily
+5. **Configuration scattered**: properties/env config everywhere
+6. **No singleton management**: multiple instances waste resources
+7. **Manual resource management**: DB connections, thread pools are error-prone
+ 
+### BENEFITS FROM SPRING CONTAINER
+
+* **Loose coupling**: swap implementations via @Primary, @Qualifier, profiles
+* **Lifecycle**: @PostConstruct, @PreDestroy, proper cleanup
+* **Cross-cutting**: @Transactional, @Cacheable, @Secured — declarative
+* **Testing**: @MockBean, @TestConfiguration — inject mocks
+* **Centralized config**: @ConfigurationProperties, profiles
+* **Singleton by default**: one instance, shared efficiently
+* **Resource management**: @Async, connection pooling, automatic cleanup
+* **Environment abstraction**: EnvironmentAware, profiles, property resolution
+   
 ## SPRING FRAMEWORK
 ### HISTORY OF SPRING FRAMEWORK
 #### **Spring's Origin and Purpose**
