@@ -1,4 +1,4 @@
-package com.rath.spring.annotationconfig;
+package com.rath.spring.simple.config.annotationconfig;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.ComponentScan;

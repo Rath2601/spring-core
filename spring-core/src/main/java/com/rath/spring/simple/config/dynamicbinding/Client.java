@@ -1,9 +1,4 @@
-package com.rath.spring.dynamicbinding;
-
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.stereotype.Component;
-
+package com.rath.spring.simple.config.dynamicbinding;
 
 
 public class Client {

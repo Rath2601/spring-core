@@ -1,6 +1,4 @@
-package com.rath.spring.dynamicbinding;
-
-import org.springframework.stereotype.Component;
+package com.rath.spring.simple.config.dynamicbinding;
 
 
 public class Travel {

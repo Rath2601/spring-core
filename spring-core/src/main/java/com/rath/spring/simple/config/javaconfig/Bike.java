@@ -1,4 +1,4 @@
-package com.rath.spring.javaconfig;
+package com.rath.spring.simple.config.javaconfig;
 
 public class Bike implements Vehicle {
 

@@ -1,4 +1,4 @@
-package com.rath.spring.dynamicbinding;
+package com.rath.spring.simple.config.dynamicbinding;
 
 
 

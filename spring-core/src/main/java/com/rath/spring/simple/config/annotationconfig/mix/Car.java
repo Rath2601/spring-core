@@ -1,7 +1,4 @@
-package com.rath.spring.annotationconfig.mix;
-
-import org.springframework.context.annotation.Primary;
-import org.springframework.stereotype.Component;
+package com.rath.spring.simple.config.annotationconfig.mix;
 
 //@Component
 //@Primary

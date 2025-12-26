@@ -1,6 +1,4 @@
-package com.rath.spring.annotationconfig.mix;
-
-import org.springframework.stereotype.Component;
+package com.rath.spring.simple.config.annotationconfig.mix;
 
 
 public class Bike implements Vehicle {

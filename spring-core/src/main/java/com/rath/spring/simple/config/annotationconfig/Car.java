@@ -1,4 +1,4 @@
-package com.rath.spring.annotationconfig;
+package com.rath.spring.simple.config.annotationconfig;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;

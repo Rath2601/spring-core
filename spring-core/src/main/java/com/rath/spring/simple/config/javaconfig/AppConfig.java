@@ -1,4 +1,4 @@
-package com.rath.spring.javaconfig;
+package com.rath.spring.simple.config.javaconfig;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package com.rath.spring.annotationconfig.mix;
+package com.rath.spring.simple.config.annotationconfig.mix;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
