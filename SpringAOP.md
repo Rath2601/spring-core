@@ -30,7 +30,7 @@
 ##### Proxy Interception Rules
 - Can intercept **non-final, non-private methods** only.
 - Methods must be **invoked via the proxy**.
-- Package-private and protected **methods** are interceptable **only with CGLIB**.
+- default and protected **methods** are interceptable **only with CGLIB**.
 
 ---
 
