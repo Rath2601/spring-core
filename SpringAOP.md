@@ -90,9 +90,9 @@ Target Method
 #### 4. AspectJ (Bytecode Weaving)
 - What AspectJ Does : Modifies compiled `.class` bytecode, not source code.
 - Weaving happens at:
-   **Compile-time (CTW)**
-   **Load-time (LTW) — most common with Spring**
-   **Post-compile**
+   - Compile-time (CTW)**
+   - Load-time (LTW) — most common with Spring**
+   - Post-compile**
 - Enabled via **@EnableLoadTimeWeaving**
 - Requires java agent enabled in JVM argument with `-javaagent:/path/to/aspectjweaver.jar`
 - AspectJ Capabilities : Self-invocation works, private and final methods can be intercepted, Constructors can be intercepted, Works on non-Spring-managed objects, True bytecode-level AOP
