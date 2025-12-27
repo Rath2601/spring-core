@@ -17,21 +17,21 @@
   - Runtime invocation
 ---
 ##### Dynamic Class Generation (Proxy-related)
-- Refers to **runtime generation of new classes or subclasses** using JVM bytecode.
-- Used for **proxy creation**, not a standalone Java language feature.
+- Refers to **runtime generation of new classes or subclasses**(.class) using JVM bytecode.
+- Used for **proxy creation**
 - Implemented via:
-  - **JDK Dynamic Proxy** → interface-based (Java SE)
-  - **CGLIB / ByteBuddy** → class-based (external libraries)
+  - **JDK Dynamic Proxy** → proxy class(eg: $Proxy0) that implement interfaces(interface-based : Java SE)
+  - **CGLIB / ByteBuddy** → generate sub-class extends concrete class (external libraries)
 > Note: Dynamic class generation is **not limited to interfaces** and is **not automatic**.
+> No proxy is created unless explicitly requested (by you or a framework)
 ---
 #### 2. Proxy in Java / Spring
 ##### What is a Proxy?
 A **proxy** is an object that:
 - Stands in front of a target object.
-- Has the **same interface or method shape**.
+- 1 proxy per target(either implementation or subclass) instance 
 - Intercepts method calls.
 - Adds behavior **before, after, or around** the real method (AOP-style).
-
 ---
 ##### Proxy Types Used by Spring
 1. **JDK Dynamic Proxy**
@@ -43,15 +43,13 @@ A **proxy** is an object that:
    - Class-based
    - Creates a **runtime subclass** of the target class
    - Overrides eligible methods
-   - Used when:
-     - No interface exists
-     - `proxyTargetClass = true`
+   - enforces even in interfaces with `proxyTargetClass = true` // in only spring (Auto-enabled in Spring Boot)
 ---
 ##### Proxy Interception Rules (JVM-level)
 - Only **non-final, non-private** methods can be intercepted.
 - Methods must be **invoked via the proxy reference**.
 - **Self-invocation bypasses the proxy**.
-- `protected` and package-private methods are interceptable **only with class-based proxies (CGLIB)**.
+- `protected` and package-private(default) methods are interceptable **only with class-based proxies (CGLIB)**.
 - `private` and `final` methods are **never interceptable** by proxies.
 
 > These limitations come from **JVM dispatch rules**, not Spring.
@@ -88,12 +86,34 @@ Target Method
 ```
 ---
 #### 4. AspectJ (Bytecode Weaving)
-- What AspectJ Does : Modifies compiled `.class` bytecode, not source code.
+- What AspectJ Does :  Weaving = injecting aspect logic into .class bytecode (Modifies compiled `.class` bytecode)
 - Weaving happens at:
-   - Compile-time (CTW)**
-   - Load-time (LTW) — most common with Spring**
-   - Post-compile**
-- Enabled via **@EnableLoadTimeWeaving**
-- Requires java agent enabled in JVM argument with `-javaagent:/path/to/aspectjweaver.jar`
+   - **Compile-time(CTW)** (use : zero runtime overhead, No JVM agent needed)
+   ```
+   javac + ajc
+   ↓
+   woven .class files
+   ↓
+   JVM runs them directly 
+  ```
+     
+   - **Load-time(LTW)** — most common with Spring (@EnableLoadTimeWeaving, -javaagent:aspectjweaver.jar, no alteration of built artifact)
+     
+    ```
+   .class file (plain)
+   ↓ (classloader + javaagent)
+   woven in memory
+   ↓
+   JVM executes woven class
+    ```
+   - **Post-compile** (used when : Third-party JARs, Legacy code, You don’t have source code)
+    ```
+   original.jar
+   ↓ ajc
+   woven.jar
+   ↓
+   JVM runs woven.jar
+    ```
+
 - AspectJ Capabilities : Self-invocation works, private and final methods can be intercepted, Constructors can be intercepted, Works on non-Spring-managed objects, True bytecode-level AOP
 - trade-off : Higher complexity, Harder debugging, Slower builds / startup, Less common in typical Spring applications
